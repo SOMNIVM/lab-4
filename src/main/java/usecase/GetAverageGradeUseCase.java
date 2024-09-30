@@ -3,7 +3,7 @@ package usecase;
 import api.GradeDataBase;
 import entity.Grade;
 import entity.Team;
-
+import usecase.GetGradeUseCase;
 /**
  * GetAverageGradeUseCase class.
  */
@@ -28,6 +28,11 @@ public final class GetAverageGradeUseCase {
         // Call the API to get all the grades for the course for all your team members
         // TODO Task 3a: Complete the logic of calculating the average course grade for
         //              your team members. Hint: the getGrades method might be useful.
+        final String[] members = team.getMembers();
+        for (int i = 0; i < members.length; i++) {
+        sum += gradeDataBase.getGrade(members[i], course).getGrade();
+        count += 1;
+        }
 
         if (count == 0) {
             return 0;
